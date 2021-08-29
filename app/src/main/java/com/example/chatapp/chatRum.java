@@ -1,6 +1,8 @@
 package com.example.chatapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +15,9 @@ public class chatRum extends AppCompatActivity {
     String name;
     String password;
 
+    private RecyclerView recycView;
+    private ValueAdapter recycAdap;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,9 +27,14 @@ public class chatRum extends AppCompatActivity {
         Bundle extras = intent.getExtras();
 
         name = extras.getString("incoming_name");
-        password = extras.getString("incoming_password");
+       // password = extras.getString("incoming_password");
 
-        TextView test = findViewById(R.id.textView);
-        test.setText(name+" "+password);
+        recycView = findViewById(R.id.recycViewXML);
+        recycView.setLayoutManager( new LinearLayoutManager(this));
+
+        recycAdap = new ValueAdapter();
+
+        recycView.setAdapter(recycAdap);
+
     }
 }

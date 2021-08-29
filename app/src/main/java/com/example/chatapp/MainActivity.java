@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                     } else {
                         Bundle extras = new Bundle();
                         extras.putString("incoming_name", nameInput);
-                        extras.putString("incoming_password", passInput);
+                      //  extras.putString("incoming_password", passInput);
                         goToChat.putExtras(extras);
                         startActivity(goToChat);
                     }
