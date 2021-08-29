@@ -87,13 +87,43 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
 
 
+    public void onClickCreateButton(View view) {
+
+
+        /*
+        database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference("users").child("testuser"); //add new users
+        ref.setValue("testlosen"); */
+
+        database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference("users");
+
+        String nameInput = editTextName.getText().toString();
+
+        ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e("firebase", "Error getting data", task.getException());
+                }
+                else {
+                    Log.d("firebase", String.valueOf(task.getResult().getValue()));
+
+                    for(DataSnapshot postSnapshot: task.getResult().getChildren()){
+                        if(nameInput.equals(String.valueOf(postSnapshot.getValue()))){
+                            Log.d("firebase", "true");
+                        };
+                    }
+
+                }
+
+            }
+        });
 
 
 
     }
-
-
-
 }
