@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -19,6 +20,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,9 +48,9 @@ public class MainActivity extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance();
 
-        DatabaseReference ref = database.getReference("users").child("testuser"); //add new users
+        /*DatabaseReference ref = database.getReference("users").child("testuser"); //add new users
 
-        ref.setValue("testlosen");
+        ref.setValue("testlosen");*/
 
     }
 
@@ -98,10 +105,15 @@ public class MainActivity extends AppCompatActivity {
         DatabaseReference ref = database.getReference("users").child("testuser"); //add new users
         ref.setValue("testlosen"); */
 
-        database = FirebaseDatabase.getInstance();
+
         DatabaseReference ref = database.getReference("users");
 
-        String nameInput = editTextName.getText().toString();
+        String nameInput = editTextName.getText().toString()+"=";
+        Pattern pattern = Pattern.compile(".*"+nameInput+".*");
+        final Matcher[] testPattern = new Matcher[1];
+
+        final Boolean[] userXist = {false};
+
 
         ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
@@ -111,16 +123,32 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else {
                     Log.d("firebase", String.valueOf(task.getResult().getValue()));
+                    Log.d("firebase", nameInput);
 
-                    for(DataSnapshot postSnapshot: task.getResult().getChildren()){
-                        if(nameInput.equals(String.valueOf(postSnapshot.getValue()))){
-                            Log.d("firebase", "true");
-                        };
+
+                    testPattern[0] = pattern.matcher(String.valueOf(task.getResult().getValue()));
+                    if(testPattern[0].matches()){
+                        Log.d("firebase", "blablablb");
+                    }
+
+
+                    if(userXist[0]) {
+                        Toast.makeText(MainActivity.this, "USER EXISTS!",Toast.LENGTH_LONG).show();
+                    } else {
+                        if(editTextName.getText().toString().equals("") && editTextPassword.getText().toString().equals("")) {
+
+                        }else {
+                            DatabaseReference ref2 = database.getReference("users").child(editTextName.getText().toString());
+                            ref2.setValue(editTextPassword.getText().toString());
+
+                        }
                     }
 
                 }
 
             }
+
+
         });
 
 
