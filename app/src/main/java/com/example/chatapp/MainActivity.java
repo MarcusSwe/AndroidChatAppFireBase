@@ -61,12 +61,16 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void onClickloginButton(View view) {
-      //  String getName = editTextName.getText().toString();
 
-        final String[] getName = {""};
         Intent goToChat = new Intent(this, chatRum.class);
 
-        DatabaseReference ref = database.getReference("users").child("testuser");
+        DatabaseReference ref = database.getReference("users");
+
+        String nameInput = editTextName.getText().toString();
+        String passInput = editTextPassword.getText().toString();
+        Pattern pattern = Pattern.compile(".*" + nameInput + "=" + passInput + ".*");
+        final Matcher[] testPattern = new Matcher[1];
+        final Boolean[] correctPassword = {false};
 
         ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
@@ -75,36 +79,28 @@ public class MainActivity extends AppCompatActivity {
                     Log.e("firebase", "Error getting data", task.getException());
                 }
                 else {
-                    Log.d("firebase", String.valueOf(task.getResult().getValue()));
-                    getName[0] = String.valueOf(task.getResult().getValue());
+                    Log.d("firebase", String.valueOf(pattern));
+                    testPattern[0] = pattern.matcher(String.valueOf(task.getResult().getValue()));
+                    if(testPattern[0].matches() && !"".equals(passInput)){
+                        correctPassword[0] = true;
+                    }
 
-                    String getPassword = editTextPassword.getText().toString();
-
-
-                    Bundle extras = new Bundle();
-
-                    Log.d("firebase", "sadgasdf");
-
-                    extras.putString("incoming_name", getName[0]);
-                    extras.putString("incoming_password", getPassword);
-                    goToChat.putExtras(extras);
-                    startActivity(goToChat);
+                    if(!correctPassword[0]){
+                        Toast.makeText(MainActivity.this, "WRONG PASSWORD!",Toast.LENGTH_LONG).show();
+                    } else {
+                        Bundle extras = new Bundle();
+                        extras.putString("incoming_name", nameInput);
+                        extras.putString("incoming_password", passInput);
+                        goToChat.putExtras(extras);
+                        startActivity(goToChat);
+                    }
                 }
-
             }
         });
-
     }
 
 
     public void onClickCreateButton(View view) {
-
-
-        /*
-        database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference("users").child("testuser"); //add new users
-        ref.setValue("testlosen"); */
-
 
         DatabaseReference ref = database.getReference("users");
 
@@ -120,16 +116,10 @@ public class MainActivity extends AppCompatActivity {
                     Log.e("firebase", "Error getting data", task.getException());
                 }
                 else {
-                    Log.d("firebase", String.valueOf(task.getResult().getValue()));
-                    Log.d("firebase", nameInput);
-
-
                     testPattern[0] = pattern.matcher(String.valueOf(task.getResult().getValue()));
                     if(testPattern[0].matches()){
                         userXist[0] = true;
                     }
-
-
                     if(userXist[0]) {
                         Toast.makeText(MainActivity.this, "USER EXISTS!",Toast.LENGTH_LONG).show();
                     } else {
@@ -138,18 +128,16 @@ public class MainActivity extends AppCompatActivity {
                         }else {
                             DatabaseReference ref2 = database.getReference("users").child(editTextName.getText().toString());
                             ref2.setValue(editTextPassword.getText().toString());
+                            Toast.makeText(MainActivity.this, "User created!",Toast.LENGTH_LONG).show();
 
                         }
                     }
-
                 }
-
             }
-
-
         });
-
-
-
     }
+
+
+
+
 }
