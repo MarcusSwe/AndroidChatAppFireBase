@@ -111,9 +111,7 @@ public class MainActivity extends AppCompatActivity {
         String nameInput = editTextName.getText().toString()+"=";
         Pattern pattern = Pattern.compile(".*"+nameInput+".*");
         final Matcher[] testPattern = new Matcher[1];
-
         final Boolean[] userXist = {false};
-
 
         ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
@@ -128,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
 
                     testPattern[0] = pattern.matcher(String.valueOf(task.getResult().getValue()));
                     if(testPattern[0].matches()){
-                        Log.d("firebase", "blablablb");
+                        userXist[0] = true;
                     }
 
 
