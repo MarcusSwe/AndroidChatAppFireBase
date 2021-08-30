@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class ValueAdapter extends RecyclerView.Adapter<ValueAdapter.ViewHolder> {
 
 
-    private String[] testTitle= {"Item sdfsdf1","Item 2sdfafasd", "Item 3sdfafsd"};
+    private String[] testTitle= {"Item sdfsdf1","Item 2sdfafasd", "Item 3sdfafsd", "Item 3sdfafsd", "Item 3sdfafsd", "Item 3sdfafsd", "Item 3sdfafsd", "Item 3sdfafsd", "Item 3sdfafsd", "Item 3sdfafsd", "Item 3sdfafsd", "Item 3sdfafsd", "Item 3sdfafsd", "Item 3sdfafsd", "Item 3sdfafsd", "Item 3sdfafsd", "Item 3sdfafsd", "Item 3sdfafsd", "Item 3sdfafsd", "Item 3sdfafsd", "Item 3sdfafsd", "Item 3sdfafsd", "Item 3sdfafsd"};
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
