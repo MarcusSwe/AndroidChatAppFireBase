@@ -9,10 +9,28 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
+
 public class ValueAdapter extends RecyclerView.Adapter<ValueAdapter.ViewHolder> {
 
+    private FirebaseDatabase database;
 
-    private String[] testTitle= {"Item sdfsdf1","Item 2sdfafasd", "Item 3sdfafsd", "Item 3sdfafsd", "Item 3sdfafsd", "Item 3sdfafsd", "Item 3sdfafsd", "Item 3sdfafsd", "Item 3sdfafsd", "Item 3sdfafsd", "Item 3sdfafsd", "Item 3sdfafsd", "Item 3sdfafsd", "Item 3sdfafsd", "Item 3sdfafsd", "Item 3sdfafsd", "Item 3sdfafsd", "Item 3sdfafsd", "Item 3sdfafsd", "Item 3sdfafsd", "Item 3sdfafsd", "Item 3sdfafsd", "Item 3sdfafsd"};
+    private ArrayList<String> messages;
+
+
+
+    public ValueAdapter(ArrayList<String> inc) {
+        messages = inc;
+    }
+
+    public void addData(String newMessage){
+        messages.add(newMessage);
+        notifyItemInserted(messages.size() -1);
+    }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -38,20 +56,24 @@ public class ValueAdapter extends RecyclerView.Adapter<ValueAdapter.ViewHolder> 
 
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recyc, viewGroup, false);
 
+
+
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ValueAdapter.ViewHolder holder, int position) {
 
-        holder.getChatText().setText(testTitle[position]);
-        Log.d("firebase", testTitle[position]);
+        holder.getChatText().setText(messages.get(position));
+        Log.d("firebase", messages.get(position));
+
+
 
     }
 
     @Override
     public int getItemCount() {
-        return testTitle.length;
+        return messages.size();
     }
 
 

@@ -20,7 +20,7 @@
         android:id="@+id/ostKaka">
 
         <EditText
-            android:id="@+id/editTextTextPersonName"
+            android:id="@+id/editTextChat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -29,12 +29,13 @@
             android:inputType="textPersonName" />
 
         <Button
-            android:id="@+id/Button"
+            android:id="@+id/buttonChat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="bottom"
-            android:text="Send" />
+            android:text="Send"
+            android:onClick="onClickChatButton"/>
 
     </LinearLayout>
 
