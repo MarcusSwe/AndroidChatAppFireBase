@@ -3,6 +3,7 @@ package com.example.chatapp;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -93,6 +94,12 @@ public class chatRum extends AppCompatActivity {
                 String go = String.valueOf(snapshot.getValue());
 
                 recycAdap.addData(go);
+
+                Intent intent = new Intent(chatRum.this, ForegroundService.class);
+                Bundle extras = new Bundle();
+                extras.putString("incoming_message", go);
+                intent.putExtras(extras);
+                ContextCompat.startForegroundService(chatRum.this, intent);
 
             }
 
