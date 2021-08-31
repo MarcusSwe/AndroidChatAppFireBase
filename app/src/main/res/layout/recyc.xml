@@ -10,7 +10,12 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="TextView"
-        android:textColor="#F1E501" />
+        android:textColor="#F1E501"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="false"
+        android:onClick="onClickTextViewChat"
+        />
 
     <Button
         android:id="@+id/buttonSave"
@@ -18,5 +23,6 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="save"
-        android:textSize="10sp" />
+        android:textSize="10sp"
+        android:onClick="onCLickSave"/>
 </LinearLayout>

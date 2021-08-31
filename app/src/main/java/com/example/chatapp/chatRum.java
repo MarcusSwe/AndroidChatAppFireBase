@@ -7,13 +7,16 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -43,6 +46,7 @@ public class chatRum extends AppCompatActivity {
 
     private EditText editTextChat;
     private Button buttonChat;
+    private Button testX;
 
     private FirebaseDatabase database;
 
@@ -148,4 +152,31 @@ public class chatRum extends AppCompatActivity {
         return true;
     }
 
+    public boolean onOptionsItemSelected (MenuItem item){
+
+        switch (item.getItemId()){
+            case R.id.login:
+
+
+                return true;
+            case R.id.chat:
+
+                //startActivity(new Intent(this, Formular.class).putExtra("inlog",userS.get(arrayPlace)));
+
+
+                return true;
+            case R.id.saved:
+                startActivity(new Intent (this, savedmessages.class));
+
+
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
+    public void onClickRecyc(View view) {
+        ((InputMethodManager) chatRum.this.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
 }
