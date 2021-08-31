@@ -1,6 +1,7 @@
 package com.example.chatapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -9,11 +10,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import java.util.ArrayList;
+
 public class savedmessages extends AppCompatActivity {
 
     private DBHelper dbHelper;
     private RecyclerView recycView;
-    private ValueAdapter recycAdap;
+    private ValueAdapterSaved recycAdap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,9 +25,15 @@ public class savedmessages extends AppCompatActivity {
 
         dbHelper = new DBHelper(savedmessages.this);
 
-        dbHelper.wholeTable();
+        ArrayList<String> omegaX = new ArrayList<>();
 
-        
+        omegaX = dbHelper.wholeTable();
+
+
+        recycView = findViewById(R.id.recycViewSaved);
+        recycView.setLayoutManager(new LinearLayoutManager(this));
+        recycAdap = new ValueAdapterSaved(omegaX);
+        recycView.setAdapter(recycAdap);
 
     }
 
@@ -59,6 +68,16 @@ public class savedmessages extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    @Override
+    public void onNewIntent(Intent i) {
+        super.onNewIntent(i);
+
+
+    }
+
+
+
 
 
 }

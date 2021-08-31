@@ -9,6 +9,8 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+
 public class DBHelper extends SQLiteOpenHelper {
 
     public static final int DATABASE_VERSION = 1;
@@ -54,19 +56,22 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
 
-    public void wholeTable(){
+    public ArrayList<String> wholeTable(){
 
         SQLiteDatabase db = this.getWritableDatabase();
 
         String selectALL = "SELECT * FROM " +TABLE_NAME;
+
+        ArrayList<String> omegaX = new ArrayList<>();
 
         Cursor cursor = db.rawQuery(selectALL, null);
 
         if (cursor.moveToNext()) {
 
             while(cursor.moveToNext()) {
-                int value_id = cursor.getInt(0);
+
                 String messages = cursor.getString(1);
+                omegaX.add(messages);
 
                 Log.d("firebase3", messages);
 
@@ -76,6 +81,7 @@ public class DBHelper extends SQLiteOpenHelper {
         cursor.close();
         db.close();
 
+        return omegaX;
     }
 
 
