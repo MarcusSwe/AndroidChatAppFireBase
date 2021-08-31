@@ -29,6 +29,7 @@ public class ValueAdapter extends RecyclerView.Adapter<ValueAdapter.ViewHolder> 
     private String idText;
     private String idButton;
     private int xx = 0;
+    private DBHelper dbHelper;
 
 
     public ValueAdapter(ArrayList<String> inc) {
@@ -75,20 +76,23 @@ public class ValueAdapter extends RecyclerView.Adapter<ValueAdapter.ViewHolder> 
 
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recyc, viewGroup, false);
 
-
         return new ViewHolder(view);
     }
+
 
     @Override
     public void onBindViewHolder(ValueAdapter.ViewHolder holder, int position) {
 
-
+        dbHelper = new DBHelper(holder.itemView.getContext());
 
         holder.getChatButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("firebase", String.valueOf(holder.getChatText().getText()));
-                
+                Log.d("firebase2", String.valueOf(holder.getChatText().getText()));
+
+                boolean status = dbHelper.addValue(String.valueOf(holder.getChatText().getText()));
+
+                Toast.makeText(holder.itemView.getContext(), "Message was added?:" + status, Toast.LENGTH_LONG).show();
             }
         });
 
@@ -96,13 +100,13 @@ public class ValueAdapter extends RecyclerView.Adapter<ValueAdapter.ViewHolder> 
             @Override
             public void onClick(View v) {
 
+
                 ((InputMethodManager) holder.itemView.getContext().getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(v.getWindowToken(), 0);
             }
         });
 
         holder.getChatText().setText(messages.get(position));
         Log.d("firebase", messages.get(position));
-
 
     }
 
