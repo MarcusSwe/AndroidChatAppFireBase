@@ -70,17 +70,7 @@ public class chatRum extends AppCompatActivity {
 
         ArrayList<String> omega = new ArrayList<String>();
         omega.add("test1");
-        omega.add("test1");
-        omega.add("test1");
-        omega.add("test1");
-        omega.add("test1");
-        omega.add("test1");
-        omega.add("test1");
-        omega.add("test1");
-        omega.add("test1");
-        omega.add("test1");
-        omega.add("test1");
-        omega.add("test1");
+
 
 
 
@@ -177,6 +167,10 @@ public class chatRum extends AppCompatActivity {
 
 
     public void onClickRecyc(View view) {
+        ((InputMethodManager) chatRum.this.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
+    public void onClickForegroundChat(View view) {
         ((InputMethodManager) chatRum.this.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 

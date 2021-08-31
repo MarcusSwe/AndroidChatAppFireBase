@@ -7,6 +7,10 @@
     android:background="@drawable/background"
     android:gravity="bottom"
     android:orientation="vertical"
+    android:clickable="true"
+    android:focusable="true"
+    android:focusableInTouchMode="false"
+    android:onClick="onClickForegroundChat"
     tools:context=".chatRum">
 
 
