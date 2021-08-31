@@ -156,12 +156,12 @@ public class chatRum extends AppCompatActivity {
 
         switch (item.getItemId()){
             case R.id.login:
-
+                startActivity(new Intent(this, MainActivity.class));
 
                 return true;
             case R.id.chat:
 
-                //startActivity(new Intent(this, Formular.class).putExtra("inlog",userS.get(arrayPlace)));
+
 
 
                 return true;

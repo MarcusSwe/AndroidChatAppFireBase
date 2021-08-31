@@ -2,8 +2,10 @@ package com.example.chatapp;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -49,7 +51,32 @@ public class DBHelper extends SQLiteOpenHelper {
         } else{
             return true;
         }
+    }
+
+
+    public void wholeTable(){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String selectALL = "SELECT * FROM " +TABLE_NAME;
+
+        Cursor cursor = db.rawQuery(selectALL, null);
+
+        if (cursor.moveToNext()) {
+
+            while(cursor.moveToNext()) {
+                int value_id = cursor.getInt(0);
+                String messages = cursor.getString(1);
+
+                Log.d("firebase3", messages);
+
+            }
+        }
+
+        cursor.close();
+        db.close();
 
     }
+
 
 }

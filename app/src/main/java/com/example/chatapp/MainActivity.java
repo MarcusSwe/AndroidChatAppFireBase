@@ -140,11 +140,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu){
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu1, menu);
-        return true;
-    }
+    public void onNewIntent(Intent i) {
+        super.onNewIntent(i);
+
+        editTextName.setText("Logged out");
+        editTextPassword.setText("");
+        }
+
+
 
 
 
