@@ -8,3 +8,5 @@ chat
 save selected message
 
 saved messages presenter
+
+notifier last message
